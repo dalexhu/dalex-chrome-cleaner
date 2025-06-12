@@ -1,0 +1,86 @@
+name: Build and Release Chrome Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install -g chrome-webstore-upload-cli
+          npm install -g @wext/shipit
+
+      - name: Build extension
+        run: |
+          # Create a zip file of the extension
+          zip -r dalex-chrome-cleaner.zip * -x "*.git*" "*.DS_Store" "*.zip"
+          
+          # Create a source code zip file
+          zip -r dalex-chrome-cleaner-source.zip * -x "*.git*" "*.DS_Store" "*.zip" "icons/favicon/*"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            # Dalex: Chrome Cleaner v${{ github.ref_name }}
+            
+            ## What's New
+            - Initial release
+            
+            ## Installation
+            1. Download the extension zip file
+            2. Unzip the file
+            3. Open Chrome and go to `chrome://extensions/`
+            4. Enable "Developer mode"
+            5. Click "Load unpacked" and select the unzipped folder
+            
+            ## Features
+            - One-click cleanup of browsing history, cookies, and cache
+            - Fully local — no data ever leaves your browser
+            - Privacy-first: no tracking, no analytics, no data collection
+            - Configurable: Choose what to clean
+            - Lightweight: No background processes or performance overhead
+            
+            ## Source Code
+            The source code is available in the `dalex-chrome-cleaner-source.zip` file.
+            
+            ## License
+            This project is licensed under the MIT License.
+          draft: false
+          prerelease: false
+
+      - name: Upload Extension Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dalex-chrome-cleaner.zip
+          asset_name: dalex-chrome-cleaner.zip
+          asset_content_type: application/zip
+
+      - name: Upload Source Code Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dalex-chrome-cleaner-source.zip
+          asset_name: dalex-chrome-cleaner-source.zip
+          asset_content_type: application/zip 
