@@ -2,11 +2,10 @@
   "manifest_version": 3,
   "name": "Dalex: Chrome Cleaner",
   "version": "0.1.0",
-  "description": "Clean your Chrome browsing data — history, cookies, and cache — with one click. Lightweight, private, and open-source.",
+  "description": "Clean your Chrome browsing data \u2014 history, cookies, and cache \u2014 with one click. Lightweight, private, and open-source.",
   "permissions": [
     "browsingData",
-    "storage",
-    "contextMenus"
+    "storage"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -21,5 +20,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "options_page": "options.html"
-} 
+  "options_page": "options.html",
+  "minimum_chrome_version": "96"
+}

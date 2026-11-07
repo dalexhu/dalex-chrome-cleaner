@@ -1,76 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dalex: Chrome Cleaner</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-width: 340px;
-      min-height: 220px;
-      background: #f5f6fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-    .popup-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-      padding: 32px 28px 24px 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 300px;
-      max-width: 340px;
-    }
-    .title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 24px;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .button {
-      background-color: #43b06e;
-      color: white;
-      padding: 14px 0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: 600;
-      width: 100%;
-      margin-bottom: 18px;
-      transition: background 0.2s;
-      box-shadow: 0 2px 8px rgba(67,176,110,0.08);
-    }
-    .button:hover {
-      background-color: #36975b;
-    }
-    .settings-link {
-      color: #888;
-      text-decoration: none;
-      font-size: 0.98rem;
-      text-align: center;
-      margin-top: 2px;
-      transition: color 0.2s;
-    }
-    .settings-link:hover {
-      color: #43b06e;
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dalex: Chrome Cleaner</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="popup-card">
-    <div class="title">Dalex: Chrome Cleaner</div>
-    <button id="cleanButton" class="button">Clean Now</button>
-    <a href="options.html" class="settings-link">Settings</a>
-  </div>
-  <script src="popup.js"></script>
+<body class="popup">
+<main>
+<header>
+<img src="icons/icon48.png" alt="">
+<div>
+<h1>Dalex Cleaner</h1>
+<p>A little less history. A little more privacy.</p>
+</div>
+</header>
+<span class="label">WHAT TO CLEAN</span>
+<div id="summary" class="summary">Loading preferences…</div>
+<label for="timeRange" class="label range-label">Time range</label>
+<select id="timeRange">
+<option value="hour">Last hour</option>
+<option value="day">Last 24 hours</option>
+<option value="week">Last 7 days</option>
+<option value="month">Last 30 days</option>
+<option value="all">All time</option>
+</select>
+<p id="cookieWarning" class="warning" hidden>Clearing cookies may sign you out of websites.</p>
+<p class="warning">Cleanup cannot be undone.</p>
+<button id="cleanButton" class="primary" disabled>Clean now</button>
+<p id="status" class="status" role="status" aria-live="polite">
+</p>
+<footer>
+<span>No tracking · No analytics</span>
+<button id="settings" class="link">Settings ↗</button>
+</footer>
+</main>
+<script src="settings.js">
+</script>
+<script src="popup.js">
+</script>
 </body>
-</html> 
+</html>

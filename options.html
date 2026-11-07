@@ -1,104 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dalex: Chrome Cleaner - Settings</title>
-  <style>
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f5f6fa;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-    .container {
-      background: #fff;
-      padding: 32px 28px 24px 28px;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      min-width: 320px;
-      max-width: 360px;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 18px;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      text-align: left;
-    }
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .option label {
-      font-size: 1rem;
-      color: #333;
-      cursor: pointer;
-      user-select: none;
-    }
-    .checkbox {
-      width: 20px;
-      height: 20px;
-      accent-color: #2196f3;
-      cursor: pointer;
-    }
-    .save-button {
-      background-color: #43b06e;
-      color: white;
-      padding: 12px 0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: background 0.2s;
-      box-shadow: 0 2px 8px rgba(67,176,110,0.08);
-    }
-    .save-button:hover {
-      background-color: #36975b;
-    }
-    .status {
-      margin-top: 12px;
-      color: #43b06e;
-      font-size: 0.98rem;
-      display: none;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dalex: Chrome Cleaner</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="container">
-    <div class="title">Dalex: Chrome Cleaner<br>Settings</div>
-    <div class="options-list">
-      <div class="option">
-        <input type="checkbox" id="clearHistory" class="checkbox">
-        <label for="clearHistory">Clear Browsing History</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="clearCookies" class="checkbox">
-        <label for="clearCookies">Clear Cookies</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="clearCache" class="checkbox">
-        <label for="clearCache">Clear Cache</label>
-      </div>
-    </div>
-    <button id="save" class="save-button">Save Settings</button>
-    <div id="status" class="status">Settings saved!</div>
-  </div>
-  <script src="options.js"></script>
+<body class="options">
+<main>
+<header>
+<img src="icons/icon48.png" alt="">
+<div>
+<h1>Dalex Cleaner</h1>
+<p>A little less history. A little more privacy.</p>
+</div>
+</header>
+<h2>Cleaning preferences</h2>
+<p>Choose what to clear and your default time range.</p>
+<form id="settingsForm">
+<fieldset id="fields" disabled>
+<legend>Data to clean</legend>
+<label class="option">
+<input type="checkbox" id="clearHistory">
+<span>
+<strong>Browsing history</strong>
+<small>Remove your record of visited pages.</small>
+</span>
+</label>
+<label class="option">
+<input type="checkbox" id="clearCookies">
+<span>
+<strong>Cookies</strong>
+<small>Remove website cookies. You may be signed out.</small>
+</span>
+</label>
+<label class="option">
+<input type="checkbox" id="clearCache">
+<span>
+<strong>Cached images and files</strong>
+<small>Sites may load more slowly on your next visit.</small>
+</span>
+</label>
+<label for="timeRange" class="label range-label">Time range</label>
+<select id="timeRange">
+<option value="hour">Last hour</option>
+<option value="day">Last 24 hours</option>
+<option value="week">Last 7 days</option>
+<option value="month">Last 30 days</option>
+<option value="all">All time</option>
+</select>
+</fieldset>
+<p class="warning">Cleanup cannot be undone. Passwords, bookmarks and downloaded files are not selected for removal.</p>
+<button id="save" class="primary" type="submit" disabled>Save settings</button>
+<p id="status" class="status" role="status" aria-live="polite">
+</p>
+</form>
+</main>
+<script src="settings.js">
+</script>
+<script src="options.js">
+</script>
 </body>
-</html> 
+</html>
