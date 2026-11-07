@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dalex: Chrome Cleaner",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Clean your Chrome browsing data \u2014 history, cookies, and cache \u2014 with one click. Lightweight, private, and open-source.",
   "permissions": [
     "browsingData",

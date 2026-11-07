@@ -21,7 +21,7 @@ Clean your Chrome browsing data — history, cookies, and cache — with one cli
 
 ## 📦 Installation
 
-> Available soon on [Chrome Web Store](https://chrome.google.com/webstore/)
+Download the installation ZIP from [GitHub Releases](https://github.com/dalexhu/dalex-chrome-cleaner/releases/latest), extract it, then load the extracted folder using the steps below. A Chrome Web Store release is not currently automated.
 
 ### Or install manually:
 1. Clone this repo or download ZIP
@@ -87,3 +87,14 @@ node --test tests/*.test.cjs
 ```
 
 For manual verification, load the folder unpacked in a **separate test Chrome profile**. Check time ranges, saved preferences, keyboard navigation, and light/dark themes. Use only disposable browsing data to test deletion.
+
+## Releasing
+
+Update `manifest.json` to a new version and optionally add `releases/vX.Y.Z.md` with release notes. Run the tests and `python3 scripts/package.py --tag vX.Y.Z` locally, then commit and push the changes. Create and push the matching tag:
+
+```sh
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+The tag workflow tests the extension, rejects mismatched versions, and builds a runtime-only ZIP plus SHA-256 checksums. It creates a draft Release, uploads and downloads the assets to verify their checksums, then publishes the Release. Failed runs can be rerun without creating a duplicate Release. Pushing `main` alone does not publish. GitHub provides source archives automatically; this workflow does not publish to Chrome Web Store.
